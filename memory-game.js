@@ -47,7 +47,6 @@ function shuffle(items) {
 
 function createCards(colors) {
   const gameBoard = document.getElementById("game");
-
   for (let color of colors) {
     //create a div
     const newDiv = document.createElement("div");
@@ -60,20 +59,34 @@ function createCards(colors) {
 
 /** Flip a card face-up. */
 
-function flipCard(card) {
+function flipCard(card, allClickedCards) {
   //change the background color to be the color of the class it has
-  card.style.backgroundColor = `${card.className}`;
+  card.style.backgroundColor = `${card.classList[0]}`;
+  //if two of the cards are not the same class then call unFlipCard
+  if (allClickedCards[0] !== allClickedCards[1]) {
+    setTimeout(function () {
+      unFlipCard(allClickedCards);
+    }, 1000);
+  }
 }
 
 /** Flip a card face-down. */
 
-function unFlipCard(card) {
-  // ... you need to write this ...
+function unFlipCard(cards) {
+  for (const card of cards) {
+    card.style.backgroundColor = "none";
+  }
 }
 
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
-  const cardColor = evt.target;
-  flipCard(cardColor);
+  const clickedCards = document.querySelectorAll(".clicked");
+  //if all clicked cards list is < 2
+  if (clickedCards.length < 2) {
+    //add classList 'click'
+    evt.target.classList.toggle("clicked");
+    //run flipCard
+    flipCard(evt.target, clickedCards);
+  }
 }
