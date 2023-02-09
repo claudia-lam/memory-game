@@ -62,7 +62,7 @@ function createCards(colors) {
 function flipCard(card, allClickedCards) {
   //change the background color to be the color of the class it has
   card.style.backgroundColor = `${card.classList[0]}`;
-  if (allClickedCards.length === 1) return;
+  if (allClickedCards.length <= 1) return;
   //if two of the cards are not the same class then call unFlipCard
   if (allClickedCards[0].classList[0] !== allClickedCards[1].classList[0]) {
     setTimeout(function () {
@@ -88,7 +88,7 @@ function unFlipCard(cards) {
 
 function handleCardClick(evt) {
   //add classList 'click'
-  evt.target.classList.toggle("clicked");
+  evt.target.classList.add("clicked");
   //if all clicked cards list is < 2
   const clickedCards = document.querySelectorAll(".clicked");
   if (clickedCards.length <= 2) {
