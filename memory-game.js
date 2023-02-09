@@ -62,11 +62,16 @@ function createCards(colors) {
 function flipCard(card, allClickedCards) {
   //change the background color to be the color of the class it has
   card.style.backgroundColor = `${card.classList[0]}`;
+  if (allClickedCards.length === 1) return;
   //if two of the cards are not the same class then call unFlipCard
-  if (allClickedCards[0] !== allClickedCards[1]) {
+  if (allClickedCards[0].classList[0] !== allClickedCards[1].classList[0]) {
     setTimeout(function () {
       unFlipCard(allClickedCards);
     }, 1000);
+  } else {
+    for (const clickedCard of allClickedCards) {
+      clickedCard.classList.toggle("clicked");
+    }
   }
 }
 
@@ -74,18 +79,19 @@ function flipCard(card, allClickedCards) {
 
 function unFlipCard(cards) {
   for (const card of cards) {
-    card.style.backgroundColor = "none";
+    card.style.backgroundColor = "";
+    card.classList.toggle("clicked");
   }
 }
 
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
-  const clickedCards = document.querySelectorAll(".clicked");
+  //add classList 'click'
+  evt.target.classList.toggle("clicked");
   //if all clicked cards list is < 2
-  if (clickedCards.length < 2) {
-    //add classList 'click'
-    evt.target.classList.toggle("clicked");
+  const clickedCards = document.querySelectorAll(".clicked");
+  if (clickedCards.length <= 2) {
     //run flipCard
     flipCard(evt.target, clickedCards);
   }
