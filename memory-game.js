@@ -67,7 +67,7 @@ function flipCard(card, allClickedCards) {
   if (allClickedCards[0].classList[0] !== allClickedCards[1].classList[0]) {
     setTimeout(function () {
       unFlipCard(allClickedCards);
-    }, 1000);
+    }, FOUND_MATCH_WAIT_MSECS);
   } else {
     for (const clickedCard of allClickedCards) {
       clickedCard.classList.toggle("clicked");
@@ -94,5 +94,7 @@ function handleCardClick(evt) {
   if (clickedCards.length <= 2) {
     //run flipCard
     flipCard(evt.target, clickedCards);
+  } else {
+    unFlipCard(clickedCards);
   }
 }
