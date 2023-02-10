@@ -44,6 +44,7 @@ function shuffle(items) {
  * - a class with the value of the color
  * - a click event listener for each card to handleCardClick
  */
+let cardClicks = 0;
 
 function createCards(colors) {
   const gameBoard = document.getElementById("game");
@@ -53,7 +54,10 @@ function createCards(colors) {
     //add the class color to each div
     newDiv.classList.add(`${color}`);
     gameBoard.append(newDiv);
-    newDiv.addEventListener("click", handleCardClick);
+    newDiv.addEventListener("click", function (e) {
+      cardClicks++;
+      cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
+    });
   }
 }
 
@@ -71,6 +75,7 @@ function flipCard(card, allClickedCards) {
   } else {
     for (const clickedCard of allClickedCards) {
       clickedCard.classList.toggle("clicked");
+      cardClicks = 0;
     }
   }
 }
@@ -81,6 +86,7 @@ function unFlipCard(cards) {
   for (const card of cards) {
     card.style.backgroundColor = "";
     card.classList.toggle("clicked");
+    cardClicks = 0;
   }
 }
 
@@ -94,7 +100,5 @@ function handleCardClick(evt) {
   if (clickedCards.length <= 2) {
     //run flipCard
     flipCard(evt.target, clickedCards);
-  } else {
-    unFlipCard(clickedCards);
   }
 }
