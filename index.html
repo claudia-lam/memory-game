@@ -12,7 +12,16 @@
     <main>
       <dialog class="start-modal">
         Let's test your memory!
-        <button class="start-btn">start</button>
+        <form action="#">
+          <label for="cards"> Choose the number of cards: </label>
+          <select name="cards" id="cards">
+            <option value="10">10</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="20">20</option>
+          </select>
+        </form>
+        <button type="submit" class="start-btn">start</button>
       </dialog>
       <div id="game"></div>
     </main>
