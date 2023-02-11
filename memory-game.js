@@ -102,3 +102,12 @@ function handleCardClick(evt) {
     flipCard(evt.target, clickedCards);
   }
 }
+
+/** Open modal on page load */
+
+window.onload = (event) => {
+  const modal = document.querySelector(".start-modal");
+  modal.showModal();
+  const startBtn = document.querySelector(".start-btn");
+  startBtn.addEventListener("click", () => modal.close());
+};

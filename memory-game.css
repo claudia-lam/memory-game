@@ -1,4 +1,7 @@
 /* you can add to or change this. */
+body {
+  text-align: center;
+}
 
 #game div {
   border: 1px solid black;
@@ -6,4 +9,24 @@
   height: 100px;
   margin: 20px;
   display: inline-block;
+}
+
+.start-modal {
+  border-radius: 10px;
+  padding: 20px 30px;
+  font-size: 20px;
+}
+
+.start-btn {
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 10px 20px;
 }
