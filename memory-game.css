@@ -3,7 +3,12 @@ body {
   text-align: center;
 }
 
-#game div {
+.cards-grid {
+  width: 50%;
+  margin: auto;
+}
+
+#game .card {
   border: 1px solid black;
   width: 100px;
   height: 100px;

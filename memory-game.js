@@ -37,10 +37,9 @@ function shuffle(items, cardAmt) {
   // statistical bias in the shuffle (many naive attempts to shuffle end up not
   // be a fair shuffle). This is called the Fisher-Yates shuffle algorithm; if
   // you're interested, you can learn about it, but it's not important.
-  // const cardNumber = parseInt(
-  //   document.getElementById("card-number").selectedOptions.text
-  // );
-  items = items.slice(0, -(items.length - cardAmt));
+  if (items.length !== cardAmt) {
+    items = items.slice(0, -(items.length - cardAmt));
+  }
   for (let i = items.length - 1; i > 0; i--) {
     // generate a random index between 0 and i
     let j = Math.floor(Math.random() * i);
@@ -57,6 +56,7 @@ function shuffle(items, cardAmt) {
  * - a click event listener for each card to handleCardClick
  */
 let cardClicks = 0;
+let flips = 0;
 
 function createCards(colors) {
   const gameBoard = document.getElementById("game");
@@ -64,7 +64,7 @@ function createCards(colors) {
     //create a div
     const newDiv = document.createElement("div");
     //add the class color to each div
-    newDiv.classList.add(`${color}`);
+    newDiv.classList.add(`${color}`, `card`);
     gameBoard.append(newDiv);
     newDiv.addEventListener("click", function (e) {
       cardClicks++;
