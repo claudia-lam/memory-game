@@ -5,37 +5,49 @@
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [
   "red",
-  "blue",
-  "green",
-  "orange",
-  "purple",
   "red",
   "blue",
+  "blue",
   "green",
-  "orange",
+  "green",
   "purple",
+  "purple",
+  "orange",
+  "orange",
+  "yellow",
+  "yellow",
+  "brown",
+  "brown",
+  "black",
+  "black",
+  "pink",
+  "pink",
+  "teal",
+  "teal",
 ];
 
-const colors = shuffle(COLORS);
+// const colors = shuffle(COLORS);
 
-createCards(colors);
+// createCards(colors);
 
 /** Shuffle array items in-place and return shuffled array. */
 
-function shuffle(items) {
+function shuffle(items, cardAmt) {
   // This algorithm does a "perfect shuffle", where there won't be any
   // statistical bias in the shuffle (many naive attempts to shuffle end up not
   // be a fair shuffle). This is called the Fisher-Yates shuffle algorithm; if
   // you're interested, you can learn about it, but it's not important.
-
+  // const cardNumber = parseInt(
+  //   document.getElementById("card-number").selectedOptions.text
+  // );
+  items = items.slice(0, -(items.length - cardAmt));
   for (let i = items.length - 1; i > 0; i--) {
     // generate a random index between 0 and i
     let j = Math.floor(Math.random() * i);
     // swap item at i <-> item at j
     [items[i], items[j]] = [items[j], items[i]];
   }
-
-  return items;
+  createCards(items);
 }
 
 /** Create card for every color in colors (each will appear twice)
@@ -108,6 +120,11 @@ function handleCardClick(evt) {
 window.onload = (event) => {
   const modal = document.querySelector(".start-modal");
   modal.showModal();
-  const startBtn = document.querySelector(".start-btn");
-  startBtn.addEventListener("click", () => modal.close());
+  const form = document.getElementById("modal-form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const cardNumber = parseInt(document.getElementById("card-number").value);
+    shuffle(COLORS, cardNumber);
+    modal.close();
+  });
 };
