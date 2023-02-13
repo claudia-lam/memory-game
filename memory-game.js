@@ -125,6 +125,8 @@ window.onload = (event) => {
     e.preventDefault();
     const cardNumber = parseInt(document.getElementById("card-number").value);
     shuffle(COLORS, cardNumber);
+    const cardsGrid = document.querySelector(".cards-grid");
+    cardsGrid.style.display = "inline-block";
     modal.close();
   });
 };
