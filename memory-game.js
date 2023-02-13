@@ -98,7 +98,7 @@ function flipCard(card, allClickedCards) {
       cardClicks = 0;
     }
   }
-  restartGame();
+  gameOver();
 }
 
 /** Flip a card face-down. */
@@ -123,7 +123,7 @@ function handleCardClick(evt) {
 }
 
 /* Restart Game after all matched pairs are found*/
-function restartGame() {
+function gameOver() {
   const matchedPairs = document.querySelectorAll(".matched");
   const cardNumber = parseInt(document.getElementById("card-number").value);
   if (matchedPairs.length === cardNumber) {
@@ -139,7 +139,8 @@ function createNewModal() {
   const newParagraph = document.createElement("p");
   newParagraph.innerText = "Would you like to play again?";
   const restartBtn = document.createElement("button");
-  restartBtn.innerText = "Restart";
+  restartBtn.innerText = "Play Again";
+  restartBtn.classList.toggle("play-again-btn");
   newModal.append(newHeading, newParagraph, restartBtn);
   const mainContainer = document.querySelector("main");
   mainContainer.append(newModal);
@@ -148,11 +149,6 @@ function createNewModal() {
     location.reload();
   });
 }
-
-/* Restart Game*/
-// function restartGame() {
-//   const restartBtn = document.querySelector("#restart");
-// }
 
 /** Open modal on page load */
 
