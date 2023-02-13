@@ -16,8 +16,8 @@ const COLORS = [
   "orange",
   "yellow",
   "yellow",
-  "brown",
-  "brown",
+  "maroon",
+  "maroon",
   "black",
   "black",
   "pink",
@@ -61,21 +61,35 @@ let flips = 0;
 function createCards(colors) {
   const gameBoard = document.getElementById("game");
   for (let color of colors) {
-    //create a div
-    const newDiv = document.createElement("div");
-    //add the class color to each div
-    newDiv.classList.add(`${color}`, `card`);
-    gameBoard.append(newDiv);
-    newDiv.addEventListener("click", function (e) {
+    const newCardContainer = createCardContainer(color, gameBoard);
+    newCardContainer.addEventListener("click", function (e) {
       flips++;
-      displayFlips();
+      displayFlipCount();
       cardClicks++;
       cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
     });
   }
 }
 
-function displayFlips() {
+function createCardContainer(color, parentNode) {
+  const cardContainer = document.createElement("div");
+  cardContainer.classList.add(`${color}`, `card`);
+  parentNode.append(cardContainer);
+  createChildImgs(color, cardContainer);
+  return cardContainer;
+}
+
+function createChildImgs(color, cardContainer) {
+  const newFrontImg = document.createElement("img");
+  newFrontImg.src = `images/${color}.png`;
+  newFrontImg.classList.toggle("front-face");
+  const newBackImg = document.createElement("img");
+  newBackImg.src = `images/alien.gif`;
+  newBackImg.classList.toggle("back-face");
+  cardContainer.append(newFrontImg, newBackImg);
+}
+
+function displayFlipCount() {
   const flip = document.querySelector("#flip-count");
   flip.innerText = `Flips: ${flips}`;
 }
