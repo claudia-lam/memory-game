@@ -67,10 +67,17 @@ function createCards(colors) {
     newDiv.classList.add(`${color}`, `card`);
     gameBoard.append(newDiv);
     newDiv.addEventListener("click", function (e) {
+      flips++;
+      displayFlips();
       cardClicks++;
       cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
     });
   }
+}
+
+function displayFlips() {
+  const flip = document.querySelector("#flip-count");
+  flip.innerText = `Flips: ${flips}`;
 }
 
 /** Flip a card face-up. */
