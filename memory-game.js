@@ -94,9 +94,11 @@ function flipCard(card, allClickedCards) {
   } else {
     for (const clickedCard of allClickedCards) {
       clickedCard.classList.toggle("clicked");
+      clickedCard.classList.toggle("matched");
       cardClicks = 0;
     }
   }
+  restartGame();
 }
 
 /** Flip a card face-down. */
@@ -112,15 +114,45 @@ function unFlipCard(cards) {
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
-  //add classList 'click'
   evt.target.classList.add("clicked");
-  //if all clicked cards list is < 2
   const clickedCards = document.querySelectorAll(".clicked");
   if (clickedCards.length <= 2) {
     //run flipCard
     flipCard(evt.target, clickedCards);
   }
 }
+
+/* Restart Game after all matched pairs are found*/
+function restartGame() {
+  const matchedPairs = document.querySelectorAll(".matched");
+  const cardNumber = parseInt(document.getElementById("card-number").value);
+  if (matchedPairs.length === cardNumber) {
+    createNewModal();
+  }
+}
+
+function createNewModal() {
+  const newModal = document.createElement("dialog");
+  newModal.classList.toggle("end-modal");
+  const newHeading = document.createElement("h3");
+  newHeading.innerText = "Yay! You found all matching pairs!";
+  const newParagraph = document.createElement("p");
+  newParagraph.innerText = "Would you like to play again?";
+  const restartBtn = document.createElement("button");
+  restartBtn.innerText = "Restart";
+  newModal.append(newHeading, newParagraph, restartBtn);
+  const mainContainer = document.querySelector("main");
+  mainContainer.append(newModal);
+  newModal.showModal();
+  restartBtn.addEventListener("click", function () {
+    location.reload();
+  });
+}
+
+/* Restart Game*/
+// function restartGame() {
+//   const restartBtn = document.querySelector("#restart");
+// }
 
 /** Open modal on page load */
 
