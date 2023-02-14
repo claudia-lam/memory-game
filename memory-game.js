@@ -113,7 +113,7 @@ function flipCard(card, allClickedCards) {
       cardClicks = 0;
     }
   }
-  gameOver();
+  setTimeout(gameOver, "2000");
 }
 
 /** Flip a card face-down. */
