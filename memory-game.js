@@ -4,26 +4,26 @@
 
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [
-  "red",
-  "red",
-  "blue",
-  "blue",
-  "green",
-  "green",
-  "purple",
-  "purple",
-  "orange",
-  "orange",
-  "yellow",
-  "yellow",
-  "maroon",
-  "maroon",
-  "black",
-  "black",
-  "pink",
-  "pink",
-  "teal",
-  "teal",
+  "red1",
+  "red2",
+  "blue1",
+  "blue2",
+  "green1",
+  "green2",
+  "purple1",
+  "purple2",
+  "orange1",
+  "orange2",
+  "yellow1",
+  "yellow2",
+  "maroon1",
+  "maroon2",
+  "black1",
+  "black2",
+  "pink1",
+  "pink2",
+  "teal1",
+  "teal2",
 ];
 
 // const colors = shuffle(COLORS);
@@ -73,6 +73,11 @@ function handleEventFiring(e) {
   cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
 }
 
+function displayFlipCount() {
+  const flip = document.querySelector("#flip-count");
+  flip.innerText = `Flips: ${flips}`;
+}
+
 function createCardContainer(color, parentNode) {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add(`${color}`, `card`);
@@ -91,29 +96,20 @@ function createChildImgs(color, cardContainer) {
   cardContainer.append(newFrontImg, newBackImg);
 }
 
-function displayFlipCount() {
-  const flip = document.querySelector("#flip-count");
-  flip.innerText = `Flips: ${flips}`;
-}
-
 /** Flip a card face-up. */
 
 function flipCard(card, allClickedCards) {
   if (allClickedCards.length <= 1) return;
-  //if two of the cards are not the same class then call unFlipCard
-  if (allClickedCards[0].classList[0] !== allClickedCards[1].classList[0]) {
+  const firstCard = allClickedCards[0].classList[0].slice(0, -1);
+  const secondCard = allClickedCards[1].classList[0].slice(0, -1);
+  if (firstCard !== secondCard) {
     setTimeout(function () {
       unFlipCard(allClickedCards);
     }, FOUND_MATCH_WAIT_MSECS);
   } else {
-    for (const clickedCard of allClickedCards) {
-      clickedCard.classList.toggle("matched");
-      clickedCard.classList.remove("clicked");
-      clickedCard.removeEventListener("click", handleEventFiring);
-      cardClicks = 0;
-    }
+    foundMatch(firstCard, allClickedCards);
   }
-  setTimeout(gameOver, "2000");
+  setTimeout(gameOver, "1000");
 }
 
 /** Flip a card face-down. */
@@ -126,13 +122,29 @@ function unFlipCard(cards) {
   }
 }
 
+function foundMatch(cardColor, matchedCards) {
+  for (const card of matchedCards) {
+    setTimeout(function () {
+      showCouples(card, cardColor);
+    }, 20000);
+    showCouples(card, cardColor);
+    card.classList.toggle("matched");
+    card.classList.remove("clicked");
+    card.removeEventListener("click", handleEventFiring);
+    cardClicks = 0;
+  }
+}
+
+function showCouples(card, cardColor) {
+  card.firstElementChild.src = `images/${cardColor}-couple.png`;
+}
+
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
   const card = evt.target.parentNode;
   card.classList.add("clicked");
   const clickedCards = document.querySelectorAll(".clicked");
-  console.log(card);
   if (clickedCards.length <= 2) {
     //run flipCard
     flipCard(card, clickedCards);
