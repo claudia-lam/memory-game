@@ -98,7 +98,7 @@ function createChildImgs(color, cardContainer) {
 
 /** Flip a card face-up. */
 
-function flipCard(card, allClickedCards) {
+function flipCard(allClickedCards) {
   if (allClickedCards.length <= 1) return;
   const firstCard = allClickedCards[0].classList[0].slice(0, -1);
   const secondCard = allClickedCards[1].classList[0].slice(0, -1);

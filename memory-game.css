@@ -91,32 +91,30 @@ h1 {
 }
 
 /** Begin modal **/
-.start-modal {
+.start-modal,
+.end-modal {
   background-color: var(--color-main-background);
   color: var(--color-concrete);
   font-weight: 700;
   width: 60%;
+  border-radius: 10px;
+  padding: 20px 30px;
 }
 
 .modal-content {
   display: flex;
 }
 
-.start-modal,
-.end-modal {
-  border-radius: 10px;
-  padding: 20px 30px;
-}
-
 .start-modal::backdrop,
 .end-modal::backdrop {
-  background: linear-gradient(45deg, red, blue);
+  background: linear-gradient(45deg, #a437a6, blue);
   opacity: 0.5;
 }
 
 .start-btn {
   position: absolute;
 }
+
 .start-btn,
 .play-again-btn {
   cursor: pointer;
@@ -130,6 +128,7 @@ h1 {
   font-size: 20px;
   padding: 10px 20px;
 }
+
 .modal-text {
   width: 50%;
   text-align: left;
@@ -145,10 +144,6 @@ h1 {
   font-size: 20px;
 }
 
-.end-modal {
-  background-color: var(--color-main-background);
-  color: var(--color-concrete);
-}
 .end-modal > img {
   width: 300px;
   height: auto;
