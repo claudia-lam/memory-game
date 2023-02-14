@@ -116,7 +116,6 @@ function flipCard(card, allClickedCards) {
 
 function unFlipCard(cards) {
   for (const card of cards) {
-    card.style.backgroundColor = "";
     card.classList.toggle("clicked");
     cardClicks = 0;
   }
@@ -126,7 +125,7 @@ function foundMatch(cardColor, matchedCards) {
   for (const card of matchedCards) {
     setTimeout(function () {
       showCouples(card, cardColor);
-    }, 1000);
+    }, 500);
     card.classList.toggle("matched");
     card.classList.remove("clicked");
     card.removeEventListener("click", handleEventFiring);
