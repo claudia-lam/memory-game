@@ -88,6 +88,17 @@ h1 {
 }
 
 /** Begin modal **/
+.start-modal {
+  background-color: var(--color-main-background);
+  color: white;
+  font-weight: 700;
+  width: 60%;
+}
+
+.modal-content {
+  display: flex;
+}
+
 .start-modal,
 .end-modal {
   border-radius: 10px;
@@ -96,11 +107,7 @@ h1 {
 
 .start-modal::backdrop,
 .end-modal::backdrop {
-  background: linear-gradient(
-    10deg,
-    var(--color-prelude),
-    var(--color-main-background)
-  );
+  background: linear-gradient(45deg, red, blue);
   opacity: 0.5;
 }
 
@@ -110,10 +117,19 @@ h1 {
   display: block;
   margin: 20px auto;
   border-radius: 4px;
-  background-color: var(--color-main-background);
+  background-color: var(--color-prelude);
   color: var(--color-concrete);
   border: none;
   text-decoration: none;
   font-size: 15px;
   padding: 10px 20px;
+}
+.modal-text {
+  width: 50%;
+  text-align: left;
+}
+
+.modal-img {
+  width: 500px;
+  height: auto;
 }
