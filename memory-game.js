@@ -126,8 +126,7 @@ function foundMatch(cardColor, matchedCards) {
   for (const card of matchedCards) {
     setTimeout(function () {
       showCouples(card, cardColor);
-    }, 20000);
-    showCouples(card, cardColor);
+    }, 1000);
     card.classList.toggle("matched");
     card.classList.remove("clicked");
     card.removeEventListener("click", handleEventFiring);
