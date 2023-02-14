@@ -2,6 +2,7 @@
   --color-vivid-violet: #a437a6;
   --color-prelude: #ccb0d9;
   --color-concrete: #f2f2f2;
+  --color-rajah: #f2b872;
   --color-main-background: #04030d;
 }
 
@@ -16,6 +17,7 @@ body {
 h1 {
   color: var(--color-concrete);
   padding: 10px 0;
+  margin: 30px 0;
   font-weight: 700;
   font-size: 100px;
 }
@@ -82,15 +84,16 @@ h1 {
 }
 
 #flip-count {
-  color: var(--color-concrete);
-  font-weight: 400;
-  font-size: 25px;
+  color: var(--color-rajah);
+  font-weight: 700;
+  font-size: 50px;
+  padding-bottom: 20px;
 }
 
 /** Begin modal **/
 .start-modal {
   background-color: var(--color-main-background);
-  color: white;
+  color: var(--color-concrete);
   font-weight: 700;
   width: 60%;
 }
@@ -140,4 +143,13 @@ h1 {
 #card-number {
   border: none;
   font-size: 20px;
+}
+
+.end-modal {
+  background-color: var(--color-main-background);
+  color: var(--color-concrete);
+}
+.end-modal > img {
+  width: 300px;
+  height: auto;
 }
