@@ -62,13 +62,15 @@ function createCards(colors) {
   const gameBoard = document.getElementById("game");
   for (let color of colors) {
     const newCardContainer = createCardContainer(color, gameBoard);
-    newCardContainer.addEventListener("click", function (e) {
-      flips++;
-      displayFlipCount();
-      cardClicks++;
-      cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
-    });
+    newCardContainer.addEventListener("click", handleEventFiring);
   }
+}
+
+function handleEventFiring(e) {
+  flips++;
+  displayFlipCount();
+  cardClicks++;
+  cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
 }
 
 function createCardContainer(color, parentNode) {
@@ -106,7 +108,8 @@ function flipCard(card, allClickedCards) {
   } else {
     for (const clickedCard of allClickedCards) {
       clickedCard.classList.toggle("matched");
-      clickedCard.classList.toggle("clicked");
+      clickedCard.classList.remove("clicked");
+      clickedCard.removeEventListener("click", handleEventFiring);
       cardClicks = 0;
     }
   }

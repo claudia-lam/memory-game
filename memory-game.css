@@ -36,7 +36,8 @@ h1 {
   transition: transform 0.5s;
 }
 
-.card.clicked {
+.card.clicked,
+.card.matched {
   transform: rotateY(180deg);
 }
 
