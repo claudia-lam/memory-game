@@ -97,8 +97,6 @@ function displayFlipCount() {
 /** Flip a card face-up. */
 
 function flipCard(card, allClickedCards) {
-  //change the background color to be the color of the class it has
-  card.style.backgroundColor = `${card.classList[0]}`;
   if (allClickedCards.length <= 1) return;
   //if two of the cards are not the same class then call unFlipCard
   if (allClickedCards[0].classList[0] !== allClickedCards[1].classList[0]) {
@@ -107,8 +105,8 @@ function flipCard(card, allClickedCards) {
     }, FOUND_MATCH_WAIT_MSECS);
   } else {
     for (const clickedCard of allClickedCards) {
-      clickedCard.classList.toggle("clicked");
       clickedCard.classList.toggle("matched");
+      clickedCard.classList.toggle("clicked");
       cardClicks = 0;
     }
   }
@@ -128,11 +126,13 @@ function unFlipCard(cards) {
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
-  evt.target.classList.add("clicked");
+  const card = evt.target.parentNode;
+  card.classList.add("clicked");
   const clickedCards = document.querySelectorAll(".clicked");
+  console.log(card);
   if (clickedCards.length <= 2) {
     //run flipCard
-    flipCard(evt.target, clickedCards);
+    flipCard(card, clickedCards);
   }
 }
 
