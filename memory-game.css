@@ -73,14 +73,11 @@ h1 {
 }
 
 /** info-bar **/
-.info {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 20px;
-  background-color: var(--color-vivid-violet);
-  border-radius: 10px;
-  margin-top: 1.5rem;
+#hint {
+  color: var(--color-vivid-violet);
+  font-size: 30px;
+  font-weight: 400;
+  padding-top: 20px;
 }
 
 #flip-count {
