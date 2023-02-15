@@ -26,10 +26,6 @@ const COLORS = [
   "teal2",
 ];
 
-// const colors = shuffle(COLORS);
-
-// createCards(colors);
-
 /** Shuffle array items in-place and return shuffled array. */
 
 function shuffle(items, cardAmt) {
@@ -99,8 +95,6 @@ function createChildImgs(color, cardContainer) {
 /** Flip a card face-up. */
 
 function flipCard(allClickedCards) {
-  if (allClickedCards.length <= 1) return;
-  console.log(allClickedCards[0]);
   const firstCard = allClickedCards[0].classList[0].slice(0, -1);
   const secondCard = allClickedCards[1].classList[0].slice(0, -1);
   if (firstCard !== secondCard) {
@@ -144,10 +138,7 @@ function handleCardClick(evt) {
   const card = evt.target.parentNode;
   card.classList.add("clicked");
   const clickedCards = document.querySelectorAll(".clicked");
-  if (clickedCards.length <= 2) {
-    //run flipCard
-    flipCard(clickedCards);
-  }
+  flipCard(clickedCards);
 }
 
 /* Restart Game after all matched pairs are found*/
