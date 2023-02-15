@@ -113,7 +113,7 @@ h1 {
 }
 
 .start-btn,
-.play-again-btn {
+.restart-btn {
   cursor: pointer;
   display: block;
   margin: 20px auto;

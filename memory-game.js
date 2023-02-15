@@ -62,18 +62,6 @@ function createCards(colors) {
   }
 }
 
-function handleEventFiring(e) {
-  flips++;
-  displayFlipCount();
-  cardClicks++;
-  cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
-}
-
-function displayFlipCount() {
-  const flip = document.querySelector("#flip-count");
-  flip.innerText = `Flips: ${flips}`;
-}
-
 function createCardContainer(color, parentNode) {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add(`${color}`, `card`);
@@ -90,6 +78,26 @@ function createChildImgs(color, cardContainer) {
   newBackImg.src = `images/alien.gif`;
   newBackImg.classList.toggle("back-face");
   cardContainer.append(newFrontImg, newBackImg);
+}
+
+function handleEventFiring(e) {
+  flips++;
+  displayFlipCount();
+  cardClicks++;
+  cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
+}
+
+/** Handle clicking on a card: this could be first-card or second-card. */
+function handleCardClick(evt) {
+  const card = evt.target.parentNode;
+  card.classList.add("clicked");
+  const clickedCards = document.querySelectorAll(".clicked");
+  flipCard(clickedCards);
+}
+
+function displayFlipCount() {
+  const flip = document.querySelector("#flip-count");
+  flip.innerText = `Flips: ${flips}`;
 }
 
 /** Flip a card face-up. */
@@ -132,40 +140,19 @@ function showCouples(card, cardColor) {
   card.firstElementChild.src = `images/${cardColor}-couple.png`;
 }
 
-/** Handle clicking on a card: this could be first-card or second-card. */
-
-function handleCardClick(evt) {
-  const card = evt.target.parentNode;
-  card.classList.add("clicked");
-  const clickedCards = document.querySelectorAll(".clicked");
-  flipCard(clickedCards);
-}
-
 /* Restart Game after all matched pairs are found*/
 function gameOver() {
   const matchedPairs = document.querySelectorAll(".matched");
   const cardNumber = parseInt(document.getElementById("card-number").value);
   if (matchedPairs.length === cardNumber) {
-    createNewModal();
+    showEndModal();
   }
 }
 
-function createNewModal() {
-  const newModal = document.createElement("dialog");
-  newModal.classList.toggle("end-modal");
-  const newHeading = document.createElement("h3");
-  newHeading.innerText = "Humanity has been restored";
-  const newImg = document.createElement("img");
-  newImg.src = `images/earth-black.gif`;
-  const newParagraph = document.createElement("p");
-  newParagraph.innerText = "Would you like to save more couples?";
-  const restartBtn = document.createElement("button");
-  restartBtn.innerText = "Save More";
-  restartBtn.classList.toggle("play-again-btn");
-  newModal.append(newHeading, newImg, newParagraph, restartBtn);
-  const mainContainer = document.querySelector("main");
-  mainContainer.append(newModal);
-  newModal.showModal();
+function showEndModal() {
+  const endModal = document.querySelector(".end-modal");
+  endModal.showModal();
+  const restartBtn = document.querySelector(".restart-btn");
   restartBtn.addEventListener("click", function () {
     location.reload();
   });
