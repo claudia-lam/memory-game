@@ -100,6 +100,7 @@ function createChildImgs(color, cardContainer) {
 
 function flipCard(allClickedCards) {
   if (allClickedCards.length <= 1) return;
+  console.log(allClickedCards[0]);
   const firstCard = allClickedCards[0].classList[0].slice(0, -1);
   const secondCard = allClickedCards[1].classList[0].slice(0, -1);
   if (firstCard !== secondCard) {
@@ -145,7 +146,7 @@ function handleCardClick(evt) {
   const clickedCards = document.querySelectorAll(".clicked");
   if (clickedCards.length <= 2) {
     //run flipCard
-    flipCard(card, clickedCards);
+    flipCard(clickedCards);
   }
 }
 
