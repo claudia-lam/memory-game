@@ -51,6 +51,7 @@ function shuffle(items, cardAmt) {
  * - a class with the value of the color
  * - a click event listener for each card to handleCardClick
  */
+
 let cardClicks = 0;
 let flips = 0;
 
@@ -87,17 +88,17 @@ function handleEventFiring(e) {
   cardClicks <= 2 ? handleCardClick(e) : (cardClicks = 0);
 }
 
+function displayFlipCount() {
+  const flip = document.querySelector("#flip-count");
+  flip.innerText = `Flips: ${flips}`;
+}
+
 /** Handle clicking on a card: this could be first-card or second-card. */
 function handleCardClick(evt) {
   const card = evt.target.parentNode;
   card.classList.add("clicked");
   const clickedCards = document.querySelectorAll(".clicked");
   flipCard(clickedCards);
-}
-
-function displayFlipCount() {
-  const flip = document.querySelector("#flip-count");
-  flip.innerText = `Flips: ${flips}`;
 }
 
 /** Flip a card face-up. */
